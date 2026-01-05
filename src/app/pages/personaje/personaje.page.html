@@ -1,13 +1,72 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>personaje</ion-title>
+  <ion-toolbar color="dark">
+    <ion-title>Estadísticas del Personaje</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">personaje</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <div *ngIf="personaje$ | async as personaje">
+
+    <h2 class="ion-text-center">{{ personaje.nombre }} (Nivel {{ personaje.nivel }})</h2>
+
+    <ion-grid fixed>
+      <ion-row class="ion-align-items-start">
+
+        <ion-col size="12" size-md="4" class="ion-text-center">
+
+          <img [src]="'assets/imgs/' + personaje.genero + '.png'" alt="Imagen del Héroe" class="personaje-img">
+
+          <ion-item lines="none" class="ion-text-center ion-margin-top">
+
+            <ion-label (click)="cambiarGenero(personaje.genero === 'mujer')">
+              Género: {{ personaje.genero === 'mujer' ? 'Mujer' : 'Hombre' }}
+            </ion-label>
+
+            <ion-toggle slot="end" [checked]="personaje.genero === 'mujer'"
+              (ionChange)="cambiarGenero($event.detail.checked)">
+            </ion-toggle>
+
+          </ion-item>
+
+        </ion-col>
+
+        <ion-col size="12" size-md="8">
+
+          <app-estadisticas-chart [personaje]="personaje"></app-estadisticas-chart>
+
+          <ion-list lines="full" class="ion-margin-top">
+            <ion-list-header>
+              <ion-label>Atributos Principales</ion-label>
+            </ion-list-header>
+
+            <ion-item>
+              <ion-label>Fuerza</ion-label>
+              <ion-label slot="end">{{ personaje.estadisticas.fuerza }}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Destreza</ion-label>
+              <ion-label slot="end">{{ personaje.estadisticas.destreza }}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Inteligencia</ion-label>
+              <ion-label slot="end">{{ personaje.estadisticas.inteligencia }}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Resistencia</ion-label>
+              <ion-label slot="end">{{ personaje.estadisticas.resistencia }}</ion-label>
+            </ion-item>
+          </ion-list>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+    <ion-button expand="block" class="ion-margin-top" (click)="iniciarAventura()">
+      Continuar al Mapa
+    </ion-button>
+
+  </div>
+
 </ion-content>

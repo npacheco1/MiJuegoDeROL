@@ -1,0 +1,15 @@
+/* src/app/pages/personaje/personaje.page.scss */
+
+.personaje-img {
+    width: 100%;
+    max-width: 250px; /* Limita el tamaño de la imagen */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+/* Ajuste para que el texto de la cabecera de la lista sea visible */
+ion-list-header {
+    color: var(--ion-color-light); 
+}
