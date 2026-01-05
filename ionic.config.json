@@ -1,0 +1,7 @@
+{
+  "name": "MiJuegoDeROL",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
